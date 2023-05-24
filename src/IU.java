@@ -138,8 +138,9 @@ public class IU extends javax.swing.JFrame {
         plateNLabel.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         plateNLabel.setForeground(new java.awt.Color(255, 255, 255));
         speedNLabel.setForeground(new java.awt.Color(255, 255, 255));
+        speedNLabel.setText("V: ");
         plateNLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        plateNLabel.setText("VELOCIDAD: ");
+        plateNLabel.setText("M: ");
         jPanel1.add(plateNLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 210, 120, 70));
 
         bg.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC-LORENZO\\Documents\\NetBeansProjects\\COD\\MVC_coches_LONOAL\\icons\\bg.jpg")); // NOI18N
@@ -178,14 +179,17 @@ public class IU extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
+        Controller.getCoche(plateSearchField.getText());
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void speedDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speedDownButtonActionPerformed
         // TODO add your handling code here:
+        Controller.bajarVelocidad(plateNLabel.getText(),10);
     }//GEN-LAST:event_speedDownButtonActionPerformed
 
     private void speedUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speedUpButtonActionPerformed
         // TODO add your handling code here:
+        Controller.subirVelocidad(plateNLabel.getText(),10);
     }//GEN-LAST:event_speedUpButtonActionPerformed
 
 
