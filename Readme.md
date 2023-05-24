@@ -14,6 +14,10 @@ classDiagram
     }
       class Controller{
           +main()
+          +crearCoche(String, String)
+          +crearCoche(String)
+          +subirVelocidad(String,Integer)
+          +bajarVelocidad(String,Integer)
       }
       class View {+muestraVelocidad(String, Integer)}
       class Model {
@@ -43,53 +47,43 @@ sequenceDiagram
     participant Model
     participant Controller
     participant View
-    Controller->>Model: Puedes crear un coche?
+    Controller->>Model: Crear un coche
     activate Model
-    Model-->>Controller: Creado!
+    Model-->>Controller: Creado
     deactivate Model
-    Controller->>+View: Muestra la velocidad, porfa
+    Controller->>+View: Muestra la velocidad
     activate View
     View->>-View: Mostrando velocidad
-    View-->>Controller: Listo!
+    View-->>Controller: Listo
     deactivate View
+    Controller->>Model: Aumentar velocidad
+    activate Model
+    Model-->>Controller: Aumentada
+    deactivate Model
+    Controller->>+View: Muestra la velocidad
+    activate View
+    View->>-View: Mostrando velocidad
+    View-->>Controller: Listo
+    deactivate View
+    Controller->>Model: Dismunuye velocidad
+    activate Model
+    Model-->>Controller: Disminuida
+    deactivate Model
+    Controller->>+View: Muestra la velocidad
+    activate View
+    View->>-View: Mostrando velocidad
+    View-->>Controller: Listo
+    deactivate View
+    Controller->>Model: Busca coche
+    activate Model
+    Model-->>Controller: Encontrado
+    deactivate Model
+    Controller->>+View: Muestra la velocidad
+    activate View
+    View->>-View: Mostrando velocidad
+    View-->>Controller: Listo
+    deactivate View
+    
 ```
 
-El mismo diagrama con los nombres de los métodos
 
-```mermaid
-sequenceDiagram
-    participant Model
-    participant Controller
-    participant View
-    Controller->>Model: crearCoche("Mercedes", "BXK 1234")
-    activate Model
-    Model-->>Controller: Coche
-    deactivate Model
-    Controller->>Model: subirVelocidad("BXK 1234", 20)
-    activate Model
-    Model-->>Controller: velocidad
-    deactivate Model
-    Controller->>+View: muestraVelocidad("BXK 1234", velocidad)
-    activate View
-    View->>-View: System.out.println()
-    View-->>Controller: boolean
-    deactivate View
-    Controller->>Model: bajarVelocidad("BXK 1234", 20)
-    activate Model
-    Model-->>Controller: velocidad
-    deactivate Model
-    Controller->>+View: muestraVelocidad("BXK 1234", velocidad)
-    activate View
-    View->>-View: System.out.println()
-    View-->>Controller: boolean
-    deactivate View
-    Controller->>Model: cambiarVelocidad("BXK 1234", 20)
-    activate Model
-    Model-->>Controller: velocidad
-    deactivate Model
-    Controller->>+View: muestraVelocidad("BXK 1234", velocidad)
-    activate View
-    View->>-View: System.out.println()
-    View-->>Controller: boolean
-    deactivate View
-```
