@@ -38,7 +38,7 @@ public class IU extends javax.swing.JFrame {
         plateSearchLabel = new javax.swing.JLabel();
         plateSearchField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
-        speedLabel = new javax.swing.JLabel();
+        plateNLabel = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -135,12 +135,12 @@ public class IU extends javax.swing.JFrame {
         });
         jPanel1.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 210, 60));
 
-        speedLabel.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        speedLabel.setForeground(new java.awt.Color(255, 255, 255));
+        plateNLabel.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        plateNLabel.setForeground(new java.awt.Color(255, 255, 255));
         speedNLabel.setForeground(new java.awt.Color(255, 255, 255));
-        speedLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        speedLabel.setText("VELOCIDAD: ");
-        jPanel1.add(speedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 210, 120, 70));
+        plateNLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        plateNLabel.setText("VELOCIDAD: ");
+        jPanel1.add(plateNLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 210, 120, 70));
 
         bg.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC-LORENZO\\Documents\\NetBeansProjects\\COD\\MVC_coches_LONOAL\\icons\\bg.jpg")); // NOI18N
         jPanel1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1280, 720));
@@ -172,7 +172,7 @@ public class IU extends javax.swing.JFrame {
     }//GEN-LAST:event_plateSearchFieldActionPerformed
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
-        // TODO add your handling code here:
+        // Crea el coche con los valores introducidos en los JTextFields de modelo y matricula
         Controller.crearCoche(modelField.getText(),plateField.getText());
     }//GEN-LAST:event_createButtonActionPerformed
 
@@ -233,8 +233,8 @@ public class IU extends javax.swing.JFrame {
     private javax.swing.JLabel plateSearchLabel;
     private javax.swing.JButton searchButton;
     private javax.swing.JButton speedDownButton;
-    private javax.swing.JLabel speedLabel;
-    private javax.swing.JLabel speedNLabel;
+    public static javax.swing.JLabel plateNLabel;
+    public static javax.swing.JLabel speedNLabel;
     private javax.swing.JButton speedUpButton;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
