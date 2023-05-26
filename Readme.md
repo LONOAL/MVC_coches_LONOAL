@@ -107,7 +107,7 @@ sequenceDiagram
 ---
 
 ## Implementando observer:
-![observer](https://unity.com/sites/default/files/styles/810_scale_width/public/2023-02/Copy%20of%208-1%20SubjectObserverAnalogy.jpg?itok=9B2QEd7M)
+![observer](https://stackabuse.s3.amazonaws.com/media/observer-design-pattern-in-python-01.jpg)
 
 El patrón Observer es como un sistema de notificaciones. Un objeto se registra para recibir actualizaciones automáticas cada vez que ocurre un cambio en otro objeto.
 ```mermaid
