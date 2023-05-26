@@ -5,4 +5,9 @@ public class View {
         IU.speedNLabel.setText(""+v);
         IU.plateNLabel.setText(""+ matricula);
     }
+
+    void dialogoExceso(){
+        Dialog.launch();
+    }
+
 }

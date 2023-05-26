@@ -16,7 +16,7 @@ public class ObsExceso implements Observer {
         Coche obxC = (Coche) arg;
         miVista.muestraVelocidad(obxC.matricula, obxC.velocidad);
         if (obxC.velocidad>120)
-            Dialog.launch();
+            miVista.dialogoExceso();
 
     }
 }
