@@ -1,12 +1,28 @@
 # Arquitectura MVC
 
-Aplicación que trabaja con objetos coches, modifica la velocidad y la muestra
+![mvc](https://miro.medium.com/v2/0*Qf1s2lG86MjX-Zcv.jpg)
+
+Aplicación que trabaja con objetos coches, modifica la velocidad y la muestra.
+
+En este caso se ha añadido un observer que detecta cuando se sobrepasan los 120km/h y lanza un jdialog que alerta de el exceso de velocidad.
+
+
 
 ---
 ## Diagrama de clases:
 
 ```mermaid
 classDiagram
+    class ObserverVelocidad {
+        +update()
+    }
+    class Observable {
+    }
+    class Coche {
+        String: matricula
+        String: modelo
+        Integer: velocidad
+    }
     class Coche {
         String: matricula
         String: modelo
@@ -14,6 +30,10 @@ classDiagram
     }
       class Controller{
           +main()
+          +crearCoche(String, String)
+          +crearCoche(String)
+          +subirVelocidad(String,Integer)
+          +bajarVelocidad(String,Integer)
       }
       class View {+muestraVelocidad(String, Integer)}
       class Model {
@@ -25,9 +45,12 @@ classDiagram
           +bajarVelocidad(String, Integer)
           +getVelocidad(String)
       }
+
     Controller "1" *-- "1" Model : association
     Controller "1" *-- "1" View : association
     Model "1" *-- "1..n" Coche : association
+    Observable <|-- Model
+    Controller "1" *-- "1" ObserverVelocidad: association
       
 ```
 
@@ -43,53 +66,79 @@ sequenceDiagram
     participant Model
     participant Controller
     participant View
-    Controller->>Model: Puedes crear un coche?
+    Controller->>Model: Crear un coche
     activate Model
-    Model-->>Controller: Creado!
+    Model-->>Controller: Creado
     deactivate Model
-    Controller->>+View: Muestra la velocidad, porfa
+    Controller->>+View: Muestra la velocidad
     activate View
     View->>-View: Mostrando velocidad
-    View-->>Controller: Listo!
+    View-->>Controller: Listo
     deactivate View
+    Controller->>Model: Aumentar velocidad
+    activate Model
+    Model-->>Controller: Aumentada
+    deactivate Model
+    Controller->>+View: Muestra la velocidad
+    activate View
+    View->>-View: Mostrando velocidad
+    View-->>Controller: Listo
+    deactivate View
+    Controller->>Model: Dismunuye velocidad
+    activate Model
+    Model-->>Controller: Disminuida
+    deactivate Model
+    Controller->>+View: Muestra la velocidad
+    activate View
+    View->>-View: Mostrando velocidad
+    View-->>Controller: Listo
+    deactivate View
+    Controller->>Model: Busca coche
+    activate Model
+    Model-->>Controller: Encontrado
+    deactivate Model
+    Controller->>+View: Muestra la velocidad
+    activate View
+    View->>-View: Mostrando velocidad
+    View-->>Controller: Listo
+    deactivate View
+    
 ```
+---
 
-El mismo diagrama con los nombres de los métodos
+## Implementando observer:
+![observer](https://stackabuse.s3.amazonaws.com/media/observer-design-pattern-in-python-01.jpg)
 
+El patrón Observer es como un sistema de notificaciones. Un objeto se registra para recibir actualizaciones automáticas cada vez que ocurre un cambio en otro objeto.
 ```mermaid
 sequenceDiagram
-    participant Model
-    participant Controller
     participant View
-    Controller->>Model: crearCoche("Mercedes", "BXK 1234")
+    participant Controller
+    participant ObserverVelocidad
+    participant Model
+    
+    Controller->>Model: Aumenta velocidad
     activate Model
-    Model-->>Controller: Coche
+    Model->>ObserverVelocidad: Notificacion de cambio de velocidad
     deactivate Model
-    Controller->>Model: subirVelocidad("BXK 1234", 20)
-    activate Model
-    Model-->>Controller: velocidad
-    deactivate Model
-    Controller->>+View: muestraVelocidad("BXK 1234", velocidad)
+    activate ObserverVelocidad
+    ObserverVelocidad->>+View: Muestra la velocidad
+    deactivate ObserverVelocidad
     activate View
-    View->>-View: System.out.println()
-    View-->>Controller: boolean
-    deactivate View
-    Controller->>Model: bajarVelocidad("BXK 1234", 20)
-    activate Model
-    Model-->>Controller: velocidad
-    deactivate Model
-    Controller->>+View: muestraVelocidad("BXK 1234", velocidad)
-    activate View
-    View->>-View: System.out.println()
-    View-->>Controller: boolean
-    deactivate View
-    Controller->>Model: cambiarVelocidad("BXK 1234", 20)
-    activate Model
-    Model-->>Controller: velocidad
-    deactivate Model
-    Controller->>+View: muestraVelocidad("BXK 1234", velocidad)
-    activate View
-    View->>-View: System.out.println()
-    View-->>Controller: boolean
+    View->>-View: Mostrando velocidad
     deactivate View
 ```
+## Pasos para la configuración
+
+1. Model:
+    - Extender `Observable`
+2. Metodos que debamos observar:
+    - setChanged()
+    - notifyObserver(valor)
+
+3. Clase observer:
+    - Crear método `update()`
+3. Controller
+    - Instanciar el observer.
+    - Añadir este observer al observable con `addObserver()`
+
