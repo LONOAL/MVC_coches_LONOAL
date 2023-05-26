@@ -2,6 +2,8 @@ public class Controller {
     static Model miModelo = new Model();
     static View miVista = new View();
     public static void main(String[] args) {
+        ObsExceso oExceso = new ObsExceso();
+        miModelo.addObserver(oExceso);
         IU.start();
     }
 
